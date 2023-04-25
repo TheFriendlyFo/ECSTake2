@@ -6,14 +6,23 @@ import javax.swing.JFrame;
 public class Window extends JFrame implements Runnable {
 
     private static Window window;
+    public ML mouseListener;
+    public KL keyListener;
     private boolean isRunning = true;
     public Window() {
+        this.mouseListener = new ML();
+        this.keyListener = new KL();
+
         setSize(1280, 720);
         setTitle("Game Thingy");
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        addMouseListener(mouseListener);
+        addMouseMotionListener(mouseListener);
+        addKeyListener(keyListener);
     }
     public static Window getWindow() {
         if (window == null) {
@@ -40,8 +49,10 @@ public class Window extends JFrame implements Runnable {
     }
 
     public void update(double dt) {
-        System.out.println(dt);
+        System.out.println(mouseListener.mousePressed);
+        if (mouseListener.mousePressed) System.out.println("Pressed");
     }
     public void init() {
+
     }
 }
